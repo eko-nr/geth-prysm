@@ -24,13 +24,8 @@ services:
       - --authrpc.port=8551
       - --syncmode=snap
       - --datadir=/data
-      - --state.scheme=path
-      - --db.engine=leveldb
+      - --maxpeers=125
       - --cache=1024
-      - --maxpeers=25
-      - --gcmode=full
-      - --snapshot=false
-      - --txlookuplimit=56000
     logging:
       driver: "json-file"
       options:
@@ -63,11 +58,9 @@ services:
       - --grpc-gateway-host=0.0.0.0
       - --grpc-gateway-port=3500
       - --min-sync-peers=3
+      - --p2p-max-peers=100
       - --checkpoint-sync-url=https://checkpoint-sync.sepolia.ethpandaops.io
       - --genesis-beacon-api-url=https://checkpoint-sync.sepolia.ethpandaops.io
-      - --slots-per-archive-point=8192
-      - --verbosity=warn                    
-      - --disable-grpc-connection-logging   
     logging:
       driver: "json-file"
       options:
