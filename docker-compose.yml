@@ -25,7 +25,7 @@ services:
       - --syncmode=snap
       - --datadir=/data
       - --cache=2048
-      - --maxpeers=125
+      - --maxpeers=250
     logging:
       driver: "json-file"
       options:
@@ -60,7 +60,7 @@ services:
       - --min-sync-peers=3
       - --checkpoint-sync-url=https://checkpoint-sync.sepolia.ethpandaops.io
       - --genesis-beacon-api-url=https://checkpoint-sync.sepolia.ethpandaops.io
-      - --p2p-max-peers=70
+      - --p2p-max-peers=140
     logging:
       driver: "json-file"
       options:
