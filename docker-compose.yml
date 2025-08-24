@@ -60,7 +60,7 @@ services:
       - --checkpoint-sync-url=https://checkpoint-sync.sepolia.ethpandaops.io
       - --genesis-beacon-api-url=https://checkpoint-sync.sepolia.ethpandaops.io
       - --p2p-max-peers=55
-      - --min-sync-peers=8
+      - --min-sync-peers=3
       - --minimum-peers-per-subnet=3
       - --max-goroutines=3000
       - --gc-percent=75
