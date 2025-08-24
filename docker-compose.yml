@@ -24,7 +24,7 @@ services:
       - --authrpc.port=8551
       - --syncmode=snap
       - --datadir=/data
-      - --cache=2048
+      - --cache=50960
       - --maxpeers=40
     logging:
       driver: "json-file"
@@ -57,12 +57,15 @@ services:
       - --grpc-gateway-corsdomain=*
       - --grpc-gateway-host=0.0.0.0
       - --grpc-gateway-port=3500
-      - --min-sync-peers=3
       - --checkpoint-sync-url=https://checkpoint-sync.sepolia.ethpandaops.io
       - --genesis-beacon-api-url=https://checkpoint-sync.sepolia.ethpandaops.io
       - --p2p-max-peers=55
-      - --p2p-outbound-peers=45
-      - --p2p-inbound-peers=10
+      - --min-sync-peers=8
+      - --minimum-peers-per-subnet=3
+      - --max-goroutines=3000
+      - --gc-percent=75
+      - --p2p-tcp-port=13000
+      - --p2p-udp-port=12000
     logging:
       driver: "json-file"
       options:
