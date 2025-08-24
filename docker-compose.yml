@@ -60,7 +60,9 @@ services:
       - --min-sync-peers=3
       - --checkpoint-sync-url=https://checkpoint-sync.sepolia.ethpandaops.io
       - --genesis-beacon-api-url=https://checkpoint-sync.sepolia.ethpandaops.io
-      - --p2p-max-peers=25
+      - --p2p-max-peers=55
+      - --p2p-outbound-peers=45
+      - --p2p-inbound-peers=10
     logging:
       driver: "json-file"
       options:
