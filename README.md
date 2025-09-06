@@ -116,7 +116,7 @@ The `nftables.conf` provides comprehensive security:
 sudo nft -f nftables.conf
 
 # Make persistent (systemd)
-sudo cp nftables.conf /etc/nftables.conf
+sudo cp nftables/nftables.conf /etc/nftables.conf
 sudo systemctl enable nftables
 ```
 
