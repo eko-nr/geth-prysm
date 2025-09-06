@@ -25,8 +25,8 @@ This setup runs a full Ethereum Sepolia testnet node consisting of:
 The JWT secret enables secure communication between execution and consensus clients:
 
 ```bash
-chmod +x generate_jwt.sh
-./generate_jwt.sh
+chmod +x scripts/generate_jwt.sh
+./scripts/generate_jwt.sh
 ```
 
 This creates:
