@@ -34,7 +34,7 @@ services:
     cpus: 6.0
     mem_limit: "8g"          
     mem_reservation: "8g"
-    stop_grace_period: 2m
+    stop_grace_period: 10m
 
   prysm:
     image: gcr.io/prysmaticlabs/prysm/beacon-chain
@@ -78,4 +78,4 @@ services:
     cpus: 4.0
     mem_limit: "4g"             
     mem_reservation: "3g"
-    stop_grace_period: 2m 
+    stop_grace_period: 10m 
