@@ -1,23 +1,11 @@
-#!/bin/bash
-# Auto-remove old Geth logs (>2 days)
+df -h /root/ethereum/execution
 
-TARGET_DIR="/root/ethereum"
+docker compose stop prysm
+docker compose stop geth
+sleep 180   
 
-# Cek direktori
-if [ ! -d "$TARGET_DIR" ]; then
-  echo "Directory $TARGET_DIR not found!"
-  exit 1
-fi
+docker compose run --rm geth snapshot prune-state --datadir /data
 
-echo "Pruning old logs in $TARGET_DIR..."
+docker compose up -d geth prysm
 
-# Stop container sementara (lebih aman daripada down)
-docker-compose stop
-
-# Hapus log lebih dari 2 hari
-find "$TARGET_DIR" -name "*.log*" -type f -mtime +2 -print -delete
-
-# Start lagi container
-docker-compose start
-
-echo "Log cleanup finished."
+docker logs -n 200 -f geth
