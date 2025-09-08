@@ -1,13 +1,23 @@
 #!/bin/bash
-# Auto-prune storage > 40GB
+# Auto-remove old Geth logs (>2 days)
 
-THRESHOLD=40960  # 40GB in MB
-USAGE=$(du -sm /root/ethereum/ | cut -f1)
+TARGET_DIR="/root/ethereum"
 
-if [ $USAGE -gt $THRESHOLD ]; then
-    echo "Storage usage $USAGE MB exceeded threshold, pruning..."
-    docker-compose down
-    # Cleanup old logs
-    find /root/ethereum/ -name "*.log*" -mtime +7 -delete
-    docker-compose up -d
+# Cek direktori
+if [ ! -d "$TARGET_DIR" ]; then
+  echo "Directory $TARGET_DIR not found!"
+  exit 1
 fi
+
+echo "Pruning old logs in $TARGET_DIR..."
+
+# Stop container sementara (lebih aman daripada down)
+docker-compose stop
+
+# Hapus log lebih dari 2 hari
+find "$TARGET_DIR" -name "*.log*" -type f -mtime +2 -print -delete
+
+# Start lagi container
+docker-compose start
+
+echo "Log cleanup finished."
