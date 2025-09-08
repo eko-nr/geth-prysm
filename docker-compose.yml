@@ -31,7 +31,7 @@ services:
       options:
         max-size: "10m"
         max-file: "3"
-    cpus: 5.0
+    cpus: 6.0
     mem_limit: "8g"          
     mem_reservation: "8g"
     stop_grace_period: 2m
