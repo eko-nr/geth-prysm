@@ -24,7 +24,7 @@ services:
       - --authrpc.port=8551
       - --syncmode=snap
       - --datadir=/data
-      - --cache=8336
+      - --cache=7000
       - --maxpeers=40
     logging:
       driver: "json-file"
@@ -32,8 +32,8 @@ services:
         max-size: "10m"
         max-file: "3"
     cpus: 4.0
-    mem_limit: "18g"          
-    mem_reservation: "16g"
+    mem_limit: "8g"          
+    mem_reservation: "8g"
     stop_grace_period: 2m
 
   prysm:
@@ -76,6 +76,6 @@ services:
         max-size: "10m"
         max-file: "3"
     cpus: 4.0
-    mem_limit: "6g"             
-    mem_reservation: "4g"
+    mem_limit: "4g"             
+    mem_reservation: "3g"
     stop_grace_period: 2m 
