@@ -24,17 +24,21 @@ services:
       - --authrpc.port=8551
       - --syncmode=snap
       - --datadir=/data
-      - --cache=7000
+      - --cache=17000
       - --maxpeers=40
     logging:
       driver: "json-file"
       options:
         max-size: "10m"
         max-file: "3"
-    cpus: 6.0
-    mem_limit: "8g"          
-    mem_reservation: "8g"
+    cpus: 15.0
+    mem_limit: "18g"
+    mem_reservation: "18g"
     stop_grace_period: 10m
+    ulimits:
+      nofile:
+        soft: 65535
+        hard: 65535
 
   prysm:
     image: gcr.io/prysmaticlabs/prysm/beacon-chain
@@ -75,7 +79,11 @@ services:
       options:
         max-size: "10m"
         max-file: "3"
-    cpus: 4.0
-    mem_limit: "4g"             
-    mem_reservation: "3g"
-    stop_grace_period: 10m 
+    cpus: 10.0
+    mem_limit: "14g"
+    mem_reservation: "13g"
+    stop_grace_period: 10m
+    ulimits:
+      nofile:
+        soft: 65535
+        hard: 65535
