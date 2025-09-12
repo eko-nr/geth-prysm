@@ -37,8 +37,8 @@ services:
     stop_grace_period: 10m
     ulimits:
       nofile:
-        soft: 65535
-        hard: 65535
+        soft: 131072
+        hard: 131072
 
   prysm:
     image: gcr.io/prysmaticlabs/prysm/beacon-chain
@@ -85,5 +85,5 @@ services:
     stop_grace_period: 10m
     ulimits:
       nofile:
-        soft: 65535
-        hard: 65535
+        soft: 131072
+        hard: 131072
