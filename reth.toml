@@ -1,0 +1,28 @@
+# ==========================================
+#  Reth High-Throughput Config (RPC heavy)
+#  For ~70-100 concurrent clients
+# ==========================================
+
+[db]
+max_readers = 1024
+
+map_size = "48GiB"
+growth_step = 134217728
+
+[rpc]
+max_connections = 1000
+
+max_batch_size = 500
+
+request_timeout_ms = 60000
+
+max_request_body_size = 10000000  # 10 MB
+
+[network]
+discovery = true
+
+[stages.execution]
+batch_size = 512
+
+[metrics]
+endpoint = "0.0.0.0:9001"
