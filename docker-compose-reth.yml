@@ -7,7 +7,7 @@ services:
     volumes:
       - /root/ethereum/execution:/data
       - /root/ethereum/jwt.hex:/jwt.hex
-      - /root/ethereum/execution/reth.toml:/config/reth.toml
+      - ./reth.toml:/config/reth.toml
     command:
       - node
       - --chain=sepolia
