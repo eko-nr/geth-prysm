@@ -1,0 +1,94 @@
+version: "3.8"
+
+services:
+  reth:
+    image: ghcr.io/paradigmxyz/reth:latest
+    container_name: reth
+    network_mode: host
+    restart: unless-stopped
+    volumes:
+      - /root/ethereum/execution:/data
+      - /root/ethereum/jwt.hex:/jwt.hex
+    command:
+      - node
+      - --chain=sepolia
+      - --datadir=/data
+      - --http
+      - --http.addr=0.0.0.0
+      - --http.port=8545
+      - --http.api=eth,net,web3,engine
+      - --ws
+      - --ws.addr=0.0.0.0
+      - --ws.port=8546
+      - --ws.api=eth,net,web3,engine
+      - --authrpc.addr=0.0.0.0
+      - --authrpc.port=8551
+      - --authrpc.jwtsecret=/jwt.hex
+      - --metrics=0.0.0.0:9001
+      - --port=30303
+      - --max-peers=100
+      - --ipcdisable
+      - --memory-limit=40G
+      - --max-blocks=64
+      - --discovery.max-outgoing=40
+      - --peers.connect-timeout=15
+      - --sync.mode=snap
+    deploy:
+      resources:
+        limits:
+          cpus: '10.0'
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    ulimits:
+      nofile:
+        soft: 262144
+        hard: 262144
+
+  prysm:
+    image: gcr.io/offchainlabs/prysm/beacon-chain:v6.1.3
+    container_name: prysm
+    network_mode: host
+    restart: unless-stopped
+    depends_on:
+      - reth
+    volumes:
+      - /root/ethereum/consensus:/data
+      - /root/ethereum/jwt.hex:/jwt.hex
+    command:
+      - --sepolia
+      - --accept-terms-of-use
+      - --datadir=/data
+      - --execution-endpoint=http://127.0.0.1:8551
+      - --jwt-secret=/jwt.hex
+      - --rpc-host=0.0.0.0
+      - --grpc-gateway-host=0.0.0.0
+      - --grpc-gateway-port=3500
+      - --grpc-gateway-corsdomain=*
+      - --checkpoint-sync-url=https://checkpoint-sync.sepolia.ethpandaops.io
+      - --genesis-beacon-api-url=https://checkpoint-sync.sepolia.ethpandaops.io
+      - --max-goroutines=4000
+      - --gc-percent=100
+      - --subscribe-all-data-subnets
+      - --p2p-tcp-port=13000
+      - --p2p-udp-port=12000
+      - --p2p-host-ip=0.0.0.0
+      - --monitoring-host=0.0.0.0
+      - --verbosity=info
+      - --p2p-max-peers=100
+      - --p2p-quic-port=9000
+    deploy:
+      resources:
+        limits:
+          cpus: '10.0'
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    ulimits:
+      nofile:
+        soft: 262144
+        hard: 262144
