@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
   reth:
     image: ghcr.io/paradigmxyz/reth:latest
