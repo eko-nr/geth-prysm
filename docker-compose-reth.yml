@@ -25,16 +25,12 @@ services:
       - --metrics=0.0.0.0:9001
       - --port=30303
       - --ipcdisable
-      - --memory-limit=40G
-      - --max-blocks=64
-      - --discovery.max-outgoing=40
-      - --peers.connect-timeout=15
     deploy:
       resources:
         limits:
           cpus: '10.0'
     logging:
-      driver: "json-file"
+      driver: json-file
       options:
         max-size: "10m"
         max-file: "3"
@@ -73,14 +69,13 @@ services:
       - --p2p-host-ip=0.0.0.0
       - --monitoring-host=0.0.0.0
       - --verbosity=info
-      - --p2p-max-peers=100
       - --p2p-quic-port=9000
     deploy:
       resources:
         limits:
           cpus: '10.0'
     logging:
-      driver: "json-file"
+      driver: json-file
       options:
         max-size: "10m"
         max-file: "3"
